@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-
+import React from "react";
 // ─── TYPES ────────────────────────────────────────────────────────────────────
 interface Program {
   icon: string;
@@ -26,218 +26,342 @@ interface Step {
   desc: string;
 }
 
-// ─── NAVBAR ───────────────────────────────────────────────────────────────────
-function Navbar({ dark, toggleDark }: { dark: boolean; toggleDark: () => void }) {
+function Navbar({
+  dark,
+  toggleDark,
+}: {
+  dark: boolean;
+  toggleDark: () => void;
+}) {
+  const [menuOpen, setMenuOpen] = React.useState(false);
+
+  const navLinks = [
+    "Home",
+    "Programs",
+    "Counseling",
+    "Resources",
+    "About",
+    "Contact",
+  ];
+
   return (
     <nav
-      className="sticky top-0 z-50 border-b backdrop-blur-md"
-      style={{ backgroundColor: "var(--bg)", borderColor: "var(--border)" }}
-    >
-      <div className="max-w-7xl mx-auto h-16 px-6 flex items-center justify-between">
-        {/* Logo */}
-        <div className="flex items-center gap-2.5">
-          <div className="w-9 h-9 flex items-center justify-center">
-            {/* SVG leaf/family icon */}
-            <svg viewBox="0 0 40 40" fill="none" className="w-9 h-9">
-              <circle cx="20" cy="20" r="20" fill="#198754" opacity="0.12" />
-              <path
-                d="M20 8c-3 4-7 6-7 11a7 7 0 0014 0c0-5-4-7-7-11z"
-                fill="#198754"
-              />
-              <circle cx="14" cy="17" r="3" fill="#198754" opacity="0.6" />
-              <circle cx="26" cy="17" r="3" fill="#198754" opacity="0.6" />
-            </svg>
-          </div>
-          <div>
-            <p className="font-bold text-sm leading-none" style={{ color: "var(--text)" }}>
-              Family Center
-            </p>
-            <p className="text-[10px]" style={{ color: "var(--text-muted)" }}>
-              Together, We Grow
-            </p>
-          </div>
-        </div>
+  className="sticky top-0 z-50 backdrop-blur-md"
+  style={{ backgroundColor: "var(--bg)" }}
+>
+  <div className="max-w-7xl mx-auto h-20 px-6 flex items-center justify-between">
 
-        {/* Nav links */}
-        <div className="hidden md:flex items-center gap-7 text-sm font-medium">
-          {["Home", "Programs", "Counseling", "Resources", "About", "Contact"].map((item) => (
-            <a
-              key={item}
-              href="#"
-              className="transition-colors hover:text-emerald-600"
-              style={
-                item === "Home"
-                  ? {
-                      color: "#198754",
-                      borderBottom: "2px solid #198754",
-                      paddingBottom: "2px",
-                    }
-                  : { color: "var(--text)" }
-              }
-            >
-              {item}
-            </a>
-          ))}
-        </div>
-
-        {/* Right actions */}
-        <div className="flex items-center gap-2">
-          {/* Theme toggle */}
-          <button
-            onClick={toggleDark}
-            className="w-9 h-9 rounded-lg border flex items-center justify-center text-base transition-colors"
-            style={{ borderColor: "var(--border)", color: "var(--text-muted)" }}
-            aria-label="Toggle theme"
-          >
-            {dark ? "☀️" : "🌙"}
-          </button>
-          <button
-            className="hidden sm:block px-4 py-2 rounded-lg border text-sm font-medium transition-colors hover:bg-gray-50 dark:hover:bg-gray-800"
-            style={{ borderColor: "var(--border)", color: "var(--text)" }}
-          >
-            Login
-          </button>
-          <button className="px-4 py-2 rounded-lg bg-emerald-700 text-white text-sm font-medium hover:bg-emerald-800 transition-colors">
-            Get Started
-          </button>
-        </div>
+    {/* Logo */}
+    <div className="flex items-center gap-2.5">
+      <div className="w-10 h-10 flex items-center justify-center">
+        <svg viewBox="0 0 40 40" fill="none" className="w-10 h-10">
+          <circle cx="20" cy="20" r="20" fill="#198754" opacity="0.12" />
+          <path
+            d="M20 8c-3 4-7 6-7 11a7 7 0 0014 0c0-5-4-7-7-11z"
+            fill="#198754"
+          />
+          <circle cx="14" cy="17" r="3" fill="#198754" opacity="0.6" />
+          <circle cx="26" cy="17" r="3" fill="#198754" opacity="0.6" />
+        </svg>
       </div>
-    </nav>
+
+      <div>
+        <p
+          className="font-bold text-lg leading-none"
+          style={{ color: "var(--text)" }}
+        >
+          Family Center
+        </p>
+
+        <p
+          className="text-xs"
+          style={{ color: "var(--text-muted)" }}
+        >
+          Together, We Grow
+        </p>
+      </div>
+    </div>
+
+    {/* Desktop Nav */}
+    <div className="hidden md:flex items-center gap-8 text-sm font-medium">
+      {navLinks.map((item) => (
+        <a
+          key={item}
+          href="#"
+          className={`transition-all duration-200 hover:text-emerald-600 ${
+            item === "Home"
+              ? "text-emerald-700 border-b-2 border-emerald-700 pb-1"
+              : ""
+          }`}
+          style={
+            item === "Home"
+              ? {}
+              : { color: "var(--text)" }
+          }
+        >
+          {item}
+        </a>
+      ))}
+    </div>
+
+    {/* Right Side */}
+    <div className="flex items-center gap-3">
+
+      {/* Theme Toggle */}
+      <button
+        onClick={toggleDark}
+        className="w-10 h-10 rounded-xl border flex items-center justify-center"
+        style={{
+          borderColor: "var(--border)",
+          color: "var(--text)",
+        }}
+      >
+        {dark ? "☀️" : "🌙"}
+      </button>
+
+      {/* Desktop Buttons */}
+      <button
+        className="hidden sm:block px-5 py-2.5 rounded-xl border text-sm font-medium"
+        style={{
+          borderColor: "var(--border)",
+          color: "var(--text)",
+        }}
+      >
+        Login
+      </button>
+
+      <button className="hidden sm:block px-5 py-2.5 rounded-xl bg-emerald-700 text-white text-sm font-medium hover:bg-emerald-800 transition-colors">
+        Get Started
+      </button>
+
+      {/* Hamburger */}
+      <button
+        onClick={() => setMenuOpen(!menuOpen)}
+        className="md:hidden w-10 h-10 flex items-center justify-center"
+      >
+        {menuOpen ? (
+          <svg
+            className="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={2}
+            viewBox="0 0 24 24"
+            style={{ color: "var(--text)" }}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        ) : (
+          <svg
+            className="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={2}
+            viewBox="0 0 24 24"
+            style={{ color: "var(--text)" }}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M4 6h16M4 12h16M4 18h16"
+            />
+          </svg>
+        )}
+      </button>
+
+    </div>
+  </div>
+
+  {/* Mobile Menu */}
+  {menuOpen && (
+    <div
+      className="md:hidden shadow-lg"
+      style={{ backgroundColor: "var(--card)" }}
+    >
+      <div className="px-6 py-5 flex flex-col gap-4">
+
+        {navLinks.map((item) => (
+          <a
+            key={item}
+            href="#"
+            className="font-medium"
+            style={{ color: "var(--text)" }}
+          >
+            {item}
+          </a>
+        ))}
+
+        <button
+          className="mt-2 px-5 py-3 rounded-xl border"
+          style={{
+            borderColor: "var(--border)",
+            color: "var(--text)",
+          }}
+        >
+          Login
+        </button>
+
+        <button className="px-5 py-3 rounded-xl bg-emerald-700 text-white">
+          Get Started
+        </button>
+
+      </div>
+    </div>
+  )}
+</nav>
   );
 }
-
 // ─── HERO ─────────────────────────────────────────────────────────────────────
 function Hero() {
   return (
-    <section
-      className="relative overflow-hidden py-16 md:py-20"
-      style={{ backgroundColor: "var(--bg)" }}
-    >
-      {/* Decorative blobs */}
-      <div
-        className="absolute -left-24 top-10 w-64 h-64 rounded-full opacity-20"
-        style={{ backgroundColor: "#d1fae5" }}
-      />
-      <div
-        className="absolute left-10 bottom-10 w-32 h-32 rounded-full opacity-10"
-        style={{ backgroundColor: "#a7f3d0" }}
-      />
+   <section
+  className="relative overflow-hidden"
+  style={{ backgroundColor: "#F6F6F4" }}
+>
+  {/* Background Decorations */}
+  <div
+    className="absolute -left-20 top-0 w-72 h-72 rounded-full opacity-20"
+    style={{ backgroundColor: "#d1fae5" }}
+  />
 
-      <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center relative z-10">
-        {/* Left */}
+  <div
+    className="absolute left-5 bottom-10 w-24 h-24 opacity-20"
+    style={{
+      backgroundImage:
+        "radial-gradient(#10b981 1px, transparent 1px)",
+      backgroundSize: "12px 12px",
+    }}
+  />
+
+  <div className="max-w-screen-2xl mx-auto grid lg:grid-cols-[42%_58%] items-stretch">
+
+    {/* LEFT CONTENT */}
+    <div className="flex flex-col justify-center px-8 lg:px-16 py-10 relative z-10">
+
+      <span className="inline-block bg-emerald-50 text-emerald-700 border border-emerald-200 px-4 py-1.5 rounded-full text-xs font-medium mb-5 w-fit">
+        Professional Guidance. Stronger Families.
+      </span>
+
+      <h1
+        className="text-4xl xl:text-5xl font-extrabold leading-tight mb-4"
+        style={{ color: "#111827" }}
+      >
+        Empowering Families.
+        <br />
+        <span className="text-emerald-600">
+          Enriching Lives.
+        </span>
+      </h1>
+
+      <p
+        className="text-sm max-w-md mb-6"
+        style={{
+          color: "#6b7280",
+          lineHeight: "1.8",
+        }}
+      >
+        Join our structured programs, live sessions,
+        and private counseling designed to help
+        you build healthier relationships and
+        a better future.
+      </p>
+
+      <div className="flex flex-wrap gap-3 mb-6">
+
+        <button className="bg-emerald-700 hover:bg-emerald-800 transition text-white px-5 py-3 rounded-xl flex items-center gap-2 font-semibold text-sm">
+          Explore Programs
+          <span>→</span>
+        </button>
+
+        <button className="border border-gray-300 px-5 py-3 rounded-xl flex items-center gap-2 font-semibold text-gray-800 hover:bg-white text-sm">
+          📅 Book Counseling
+        </button>
+
+      </div>
+
+      {/* Trust Section */}
+      <div className="flex items-center gap-3">
+
+        <div className="flex -space-x-2">
+          <div className="w-8 h-8 rounded-full bg-orange-400 border-2 border-white"></div>
+          <div className="w-8 h-8 rounded-full bg-blue-400 border-2 border-white"></div>
+          <div className="w-8 h-8 rounded-full bg-pink-400 border-2 border-white"></div>
+        </div>
+
         <div>
-          <span className="inline-block bg-emerald-50 text-emerald-700 border border-emerald-200 px-4 py-1.5 rounded-full text-xs font-medium mb-5">
-            Professional Guidance. Stronger Families.
-          </span>
-
-          <h1
-            className="text-5xl xl:text-6xl font-extrabold leading-tight mb-5"
-            style={{ color: "var(--text)" }}
-          >
-            Empowering Families.
-            <br />
-            <span className="text-emerald-600">Enriching Lives.</span>
-          </h1>
-
-          <p className="text-base mb-8 max-w-md" style={{ color: "var(--text-muted)" }}>
-            Join our structured programs, live sessions, and private counseling designed to
-            help you build healthier relationships and a better future.
+          <p className="font-semibold text-sm text-gray-900">
+            5000+ Families Trust Us
           </p>
 
-          <div className="flex flex-wrap gap-3 mb-8">
-            <button className="flex items-center gap-2 px-6 py-3 rounded-xl bg-emerald-700 text-white text-sm font-semibold hover:bg-emerald-800 transition-colors">
-              Explore Programs
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </button>
-            <button
-              className="flex items-center gap-2 px-6 py-3 rounded-xl border text-sm font-semibold transition-colors hover:bg-gray-50 dark:hover:bg-gray-800"
-              style={{ borderColor: "var(--border)", color: "var(--text)" }}
-            >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
-                <rect x="3" y="4" width="18" height="18" rx="2" />
-                <path strokeLinecap="round" d="M16 2v4M8 2v4M3 10h18" />
-              </svg>
-              Book Counseling
-            </button>
-          </div>
-
-          {/* Social proof */}
-          <div className="flex items-center gap-3">
-            <div className="flex -space-x-2">
-              {["bg-orange-400", "bg-blue-400", "bg-pink-400"].map((c, i) => (
-                <div
-                  key={i}
-                  className={`w-8 h-8 rounded-full border-2 border-white ${c} flex items-center justify-center text-white text-xs font-bold`}
-                >
-                  {["S", "J", "M"][i]}
-                </div>
-              ))}
-            </div>
-            <div>
-              <p className="text-sm font-semibold" style={{ color: "var(--text)" }}>
-                5000+ Families Trust Us
-              </p>
-              <div className="flex items-center gap-1">
-                {"★★★★★".split("").map((s, i) => (
-                  <span key={i} className="text-yellow-400 text-xs">
-                    {s}
-                  </span>
-                ))}
-                <span className="text-xs ml-1" style={{ color: "var(--text-muted)" }}>
-                  4.9 (320+ Reviews)
-                </span>
-              </div>
-            </div>
-          </div>
+          <p className="text-xs text-gray-500">
+            ⭐⭐⭐⭐⭐ 4.9 (320+ Reviews)
+          </p>
         </div>
 
-        {/* Right — Hero image */}
-        <div className="relative">
-          <div className="rounded-[40px] overflow-hidden h-[460px] w-full bg-gray-200 relative">
-            {/* Replace src with your local image path e.g. "/hero-family.jpg" */}
-            <img
-              src="/Images/premium_photo-1661660247608-236c8bafd3cb.avif"
-              alt="Happy family"
-              className="w-full h-full object-cover"
-              onError={(e) => {
-                const t = e.currentTarget;
-                t.style.display = "none";
-                if (t.parentElement) {
-                  t.parentElement.style.background =
-                    "linear-gradient(135deg,#d1fae5 0%,#a7f3d0 50%,#6ee7b7 100%)";
-                }
-              }}
-            />
-            
-          </div>
-
-          {/* Live Sessions card */}
-          <div
-            className="absolute right-4 bottom-6 p-4 rounded-2xl shadow-xl w-44"
-            style={{ backgroundColor: "var(--card)", border: "1px solid var(--border)" }}
-          >
-            <div className="w-8 h-8 rounded-lg bg-emerald-700 flex items-center justify-center mb-2">
-              <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M15 10l4.553-2.277A1 1 0 0121 8.677V15.32a1 1 0 01-1.447.894L15 14M3 8a2 2 0 012-2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z" />
-              </svg>
-            </div>
-            <p className="font-bold text-sm" style={{ color: "var(--text)" }}>
-              Live Sessions
-            </p>
-            <p className="text-xs mt-1" style={{ color: "var(--text-muted)" }}>
-              Join expert-led live sessions from anywhere.
-            </p>
-            <button className="mt-2 w-7 h-7 rounded-full bg-emerald-700 flex items-center justify-center ml-auto">
-              <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </button>
-          </div>
-        </div>
       </div>
-    </section>
+
+    </div>
+
+    {/* RIGHT IMAGE SECTION */}
+    <div className="relative">
+
+      <div
+        className="absolute inset-0 overflow-hidden"
+        style={{
+          borderTopLeftRadius: "450px",
+          borderBottomLeftRadius: "450px",
+        }}
+      >
+        <img
+          src="/Images/premium_photo-1661660247608-236c8bafd3cb.avif"
+          alt="Happy Family"
+          className="w-full h-full object-cover object-center"
+        />
+      </div>
+
+      {/* Invisible spacer so image gets same height as content */}
+      <div className="h-full min-h-[460px]"></div>
+
+      {/* Floating Card */}
+      <div className="absolute right-8 top-1/2 -translate-y-1/2 bg-white rounded-3xl shadow-2xl p-5 w-52 z-20">
+
+      <div className="w-12 h-12 rounded-xl bg-emerald-700 flex items-center justify-center mb-4">
+  <svg
+    className="w-6 h-6 text-white"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={2}
+    viewBox="0 0 24 24"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M15 10l4.553-2.277A1 1 0 0121 8.677V15.32a1 1 0 01-1.447.894L15 14M3 8a2 2 0 012-2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z"
+    />
+  </svg>
+</div>
+
+        <h3 className="font-bold text-gray-900 text-2xl">
+          Live Sessions
+        </h3>
+
+        <p className="text-sm text-gray-500 mt-2">
+          Join expert-led live sessions from anywhere.
+        </p>
+
+        <button className="mt-5 ml-auto w-9 h-9 rounded-full bg-emerald-700 text-white flex items-center justify-center">
+          →
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
   );
 }
 function StatsBar() {
@@ -276,7 +400,7 @@ function StatsBar() {
       <div className="max-w-6xl mx-auto px-6">
 
         <div
-          className="rounded-[32px] p-8 md:p-10 -mt-16"
+          className="rounded-[32px] p-8 md:p-10 -mt-1"
           style={{
             backgroundColor: "var(--card)",
             boxShadow:
@@ -451,65 +575,102 @@ function ProgramsAndCounseling() {
 }
 
 // ─── HOW IT WORKS + TESTIMONIAL + STAY CONNECTED ─────────────────────────────
+// ─── HOW IT WORKS + TESTIMONIAL + STAY CONNECTED ─────────────────────────────
 function BottomSections() {
-  const steps: Step[] = [
-    { icon: "📝", label: "Sign Up", desc: "Create your account in minutes." },
-    { icon: "📚", label: "Choose Program", desc: "Select a program or book a session." },
-    { icon: "🎥", label: "Join Sessions", desc: "Attend live sessions and participate." },
-    { icon: "🌱", label: "Grow & Heal", desc: "Apply learnings and transform your life." },
+  const steps = [
+    {
+      icon: (
+        <svg className="w-5 h-5 text-emerald-700" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414A1 1 0 0121 9.414V19a2 2 0 01-2 2z" />
+        </svg>
+      ),
+      label: "Sign Up",
+      desc: "Create your account in minutes.",
+    },
+    {
+      icon: (
+        <svg className="w-5 h-5 text-emerald-700" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+        </svg>
+      ),
+      label: "Choose Program",
+      desc: "Select a program or book a session.",
+    },
+    {
+      icon: (
+        <svg className="w-5 h-5 text-emerald-700" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M15 10l4.553-2.277A1 1 0 0121 8.677V15.32a1 1 0 01-1.447.894L15 14M3 8a2 2 0 012-2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z" />
+        </svg>
+      ),
+      label: "Join Sessions",
+      desc: "Attend live sessions and participate.",
+    },
+    {
+      icon: (
+        <svg className="w-5 h-5 text-emerald-700" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1m0 16v1m8.66-9h-1M4.34 12h-1m15.07-6.07l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
+        </svg>
+      ),
+      label: "Grow & Heal",
+      desc: "Apply learnings and transform your life.",
+    },
   ];
 
   const [active, setActive] = useState(0);
 
   const testimonials = [
     {
-      quote:
-        "Family Center has been a blessing for our family. The sessions are life-changing!",
+      quote: "Family Center has been a blessing for our family. The sessions are life-changing!",
       name: "Sarah Johnson",
       role: "Program Participant",
-      avatar: "S",
-      avatarBg: "bg-orange-400",
+      image: "/testimonial-sarah.jpg",
     },
     {
-      quote:
-        "The counselors are incredibly professional and empathetic. Highly recommend!",
+      quote: "The counselors are incredibly professional and empathetic. Highly recommend!",
       name: "David Kimani",
       role: "Marriage Program",
-      avatar: "D",
-      avatarBg: "bg-blue-500",
+      image: "/testimonial-david.jpg",
     },
     {
-      quote:
-        "I finally found the support I needed. The anonymous sessions gave me confidence.",
+      quote: "I finally found the support I needed. The anonymous sessions gave me confidence.",
       name: "Amina Wanjiru",
       role: "Anonymous Support User",
-      avatar: "A",
-      avatarBg: "bg-pink-500",
+      image: "/testimonial-amina.jpg",
     },
   ];
 
   return (
-    <section className="py-16" style={{ backgroundColor: "var(--bg)" }}>
-      <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-[1fr_1fr_340px] gap-8">
-        {/* How It Works */}
-        <div>
-          <h2 className="text-2xl font-extrabold mb-8" style={{ color: "var(--text)" }}>
+    <section className="py-10 overflow-hidden" style={{ backgroundColor: "var(--bg)" }}>
+      <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-[1fr_1fr_320px] gap-6 items-stretch">
+
+        {/* ── HOW IT WORKS ── */}
+        <div
+          className="-ml-6 pl-6 pr-6 py-6 shadow-[0_4px_24px_0_rgba(0,0,0,0.08)] flex flex-col justify-center"
+          style={{ backgroundColor: "var(--card)" }}
+        >
+          <h2 className="text-base font-extrabold mb-1" style={{ color: "var(--text)" }}>
             How It Works
           </h2>
-          <div className="flex items-start gap-0">
+
+          <div className="flex items-start">
             {steps.map((step, i) => (
               <div key={step.label} className="flex-1 flex flex-col items-center text-center relative">
-                {/* connector line */}
                 {i < steps.length - 1 && (
-                  <div className="absolute top-5 left-[60%] w-[80%] h-px border-t-2 border-dashed border-emerald-300" />
+                  <div
+                    className="absolute top-5 left-[56%] w-[88%] border-t-2 border-dashed border-emerald-300"
+                    style={{ zIndex: 0 }}
+                  />
                 )}
-                <div className="w-10 h-10 rounded-full bg-emerald-50 border-2 border-emerald-300 flex items-center justify-center text-lg z-10 relative">
+                <div
+                  className="relative z-10 w-10 h-10 rounded-full border-2 border-emerald-300 flex items-center justify-center"
+                  style={{ backgroundColor: "var(--bg)" }}
+                >
                   {step.icon}
                 </div>
-                <p className="font-semibold text-xs mt-2" style={{ color: "var(--text)" }}>
+                <p className="font-semibold text-[11px] mt-2 leading-tight" style={{ color: "var(--text)" }}>
                   {step.label}
                 </p>
-                <p className="text-[10px] mt-1 px-1" style={{ color: "var(--text-muted)" }}>
+                <p className="text-[10px] mt-1 px-1 leading-tight" style={{ color: "var(--text-muted)" }}>
                   {step.desc}
                 </p>
               </div>
@@ -517,26 +678,55 @@ function BottomSections() {
           </div>
         </div>
 
-        {/* Testimonials */}
-        <div>
-          <h2 className="text-2xl font-extrabold mb-6" style={{ color: "var(--text)" }}>
+        {/* ── WHAT FAMILIES SAY ── */}
+        <div className="flex flex-col justify-center">
+          {/* <h2 className="text-base font-extrabold mb-4" style={{ color: "var(--text)" }}>
+            What Families Say
+          </h2> */}
+
+          <div
+            className="p-5 rounded-2xl shadow-lg"
+            style={{ backgroundColor: "var(--card)" }}
+          >
+            <h2 className="text-base font-extrabold mb-4" style={{ color: "var(--text)" }}>
             What Families Say
           </h2>
-          <div
-            className="p-5 rounded-2xl border"
-            style={{ borderColor: "var(--border)", backgroundColor: "var(--card)" }}
-          >
-            <div className="text-4xl text-emerald-300 leading-none mb-3">"</div>
-            <p className="text-sm" style={{ color: "var(--text)" }}>
-              {testimonials[active].quote}
-            </p>
-            <div className="flex items-center gap-3 mt-4">
+            {/* Quote mark + text side by side */}
+            <div className="flex items-start gap-2">
               <div
-                className={`w-10 h-10 rounded-full ${testimonials[active].avatarBg} flex items-center justify-center text-white font-bold`}
+                className="text-4xl font-serif leading-none select-none flex-shrink-0 mt-[-4px]"
+                style={{ color: "#198754" }}
               >
-                {testimonials[active].avatar}
+                ❝
               </div>
-              <div>
+              <p className="text-sm leading-relaxed" style={{ color: "var(--text)" }}>
+                {testimonials[active].quote}
+              </p>
+            </div>
+
+            <div className="flex items-center gap-3 mt-4">
+              {/* Avatar */}
+              <div className="w-10 h-10 rounded-full overflow-hidden bg-emerald-100 flex-shrink-0 relative">
+                <img
+                  src={testimonials[active].image}
+                  alt={testimonials[active].name}
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    e.currentTarget.style.display = "none";
+                    const parent = e.currentTarget.parentElement;
+                    if (parent && !parent.querySelector(".fallback-initial")) {
+                      const div = document.createElement("div");
+                      div.className =
+                        "fallback-initial absolute inset-0 flex items-center justify-center text-emerald-700 font-bold text-sm";
+                      div.textContent = testimonials[active].name.charAt(0);
+                      parent.appendChild(div);
+                    }
+                  }}
+                />
+              </div>
+
+              {/* Name + role */}
+              <div className="flex-1">
                 <p className="font-semibold text-sm" style={{ color: "var(--text)" }}>
                   {testimonials[active].name}
                 </p>
@@ -544,51 +734,73 @@ function BottomSections() {
                   {testimonials[active].role}
                 </p>
               </div>
+
+              {/* 4 dots — right of profile */}
+              <div className="flex gap-1.5 items-center">
+                {[0, 1, 2, 3].map((i) => (
+                  <button
+                    key={i}
+                    onClick={() => setActive(i % testimonials.length)}
+                    className="rounded-full transition-all duration-300"
+                    style={{
+                      width: i === active ? "20px" : "8px",
+                      height: "8px",
+                      backgroundColor: i === active ? "#198754" : "#d1d5db",
+                    }}
+                  />
+                ))}
+              </div>
             </div>
-          </div>
-          {/* Dots */}
-          <div className="flex gap-2 mt-3 justify-center">
-            {testimonials.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setActive(i)}
-                className={`w-2.5 h-2.5 rounded-full transition-colors ${
-                  i === active ? "bg-emerald-600" : "bg-gray-300"
-                }`}
-              />
-            ))}
           </div>
         </div>
 
-        {/* Stay Connected */}
-        <div
-          className="rounded-2xl p-5 relative overflow-hidden"
-          style={{ backgroundColor: "var(--card)", border: "1px solid var(--border)" }}
-        >
-          {/* Decorative plant */}
-          <div className="absolute right-4 top-4 text-5xl opacity-40 select-none">🌿</div>
-          <h3 className="font-extrabold text-lg mb-2" style={{ color: "var(--text)" }}>
-            Stay Connected
-          </h3>
-          <p className="text-xs mb-4" style={{ color: "var(--text-muted)" }}>
-            Subscribe to get updates on new programs, resources and special offers.
-          </p>
-          <div className="flex gap-2">
-            <input
-              type="email"
-              placeholder="Enter your email"
-              className="flex-1 min-w-0 px-3 py-2 rounded-lg border text-sm outline-none focus:ring-2 focus:ring-emerald-500"
-              style={{
-                borderColor: "var(--border)",
-                backgroundColor: "var(--bg)",
-                color: "var(--text)",
-              }}
-            />
-            <button className="px-4 py-2 rounded-lg bg-emerald-700 text-white text-sm font-semibold hover:bg-emerald-800 transition-colors whitespace-nowrap">
-              Subscribe
-            </button>
+        {/* ── STAY CONNECTED ── */}
+        <div className="flex flex-col justify-center mt-4">
+          <div
+            className="rounded-2xl p-5 relative overflow-hidden flex gap-3 items-start"
+            style={{ backgroundColor: "#E8F2EA" }}
+          >
+            {/* Left content */}
+            <div className="flex-1 min-w-0 relative z-10">
+              <h3 className="font-extrabold text-sm mb-1.5" style={{ color: "#111827" }}>
+                Stay Connected
+              </h3>
+              <p className="text-xs leading-relaxed mb-3" style={{ color: "#4b5563" }}>
+                Subscribe to get updates on new programs, resources and special offers.
+              </p>
+
+              {/* Joined email + button */}
+              <div className="flex rounded-lg overflow-hidden border border-emerald-300 bg-white">
+                <input
+                  type="email"
+                  placeholder="Enter your email"
+                  className="flex-1 min-w-0 px-3 py-2 text-xs outline-none bg-transparent text-gray-800 placeholder-gray-400"
+                />
+                <button className="px-3 py-2 bg-emerald-700 text-white text-xs font-semibold hover:bg-emerald-800 transition-colors whitespace-nowrap flex-shrink-0">
+                  Subscribe
+                </button>
+              </div>
+            </div>
+
+            {/* Right — plant image placeholder */}
+            <div className="flex-shrink-0 w-14 relative self-stretch">
+              <img
+                src="/Images/plant-decor.jpg"
+                alt="Decorative plant"
+                className="absolute bottom-0 right-0 h-20 w-auto object-contain"
+                onError={(e) => {
+                  e.currentTarget.style.display = "none";
+                  const parent = e.currentTarget.parentElement;
+                  if (parent) {
+                    parent.innerHTML =
+                      '<div class="absolute bottom-0 right-0 text-4xl select-none" style="opacity:0.55">🌿</div>';
+                  }
+                }}
+              />
+            </div>
           </div>
         </div>
+
       </div>
     </section>
   );

@@ -25,14 +25,7 @@ interface Step {
   label: string;
   desc: string;
 }
-
-function Navbar({
-  dark,
-  toggleDark,
-}: {
-  dark: boolean;
-  toggleDark: () => void;
-}) {
+function Navbar() {
   const [menuOpen, setMenuOpen] = React.useState(false);
 
   const navLinks = [
@@ -107,17 +100,7 @@ function Navbar({
     {/* Right Side */}
     <div className="flex items-center gap-3">
 
-      {/* Theme Toggle */}
-      <button
-        onClick={toggleDark}
-        className="w-10 h-10 rounded-xl border flex items-center justify-center"
-        style={{
-          borderColor: "var(--border)",
-          color: "var(--text)",
-        }}
-      >
-        {dark ? "☀️" : "🌙"}
-      </button>
+      
 
       {/* Desktop Buttons */}
       <button
@@ -285,11 +268,25 @@ function Hero() {
       {/* Trust Section */}
       <div className="flex items-center gap-3">
 
-        <div className="flex -space-x-2">
-          <div className="w-8 h-8 rounded-full bg-orange-400 border-2 border-white"></div>
-          <div className="w-8 h-8 rounded-full bg-blue-400 border-2 border-white"></div>
-          <div className="w-8 h-8 rounded-full bg-pink-400 border-2 border-white"></div>
-        </div>
+      <div className="flex -space-x-2">
+  <img
+    src="/Images/avatar1.jpg"
+    alt="Member"
+    className="w-8 h-8 rounded-full border-2 border-white object-cover"
+  />
+
+  <img
+    src="/Images/avatar2.jpg"
+    alt="Member"
+    className="w-8 h-8 rounded-full border-2 border-white object-cover"
+  />
+
+  <img
+    src="/Images/avatar3.jpg"
+    alt="Member"
+    className="w-8 h-8 rounded-full border-2 border-white object-cover"
+  />
+</div>
 
         <div>
           <p className="font-semibold text-sm text-gray-900">
@@ -367,28 +364,87 @@ function Hero() {
 function StatsBar() {
   const stats = [
     {
-      icon: "👨‍👩‍👧‍👦",
-      iconBg: "#d1fae5",
+      iconBg: "",
       value: "10,000+",
       label: "Families Helped",
+      icon: (
+        <svg
+          className="w-7 h-7"
+          fill="none"
+          stroke="#065f46"
+          strokeWidth={2}
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M17 20h5V18a4 4 0 00-5-3.87M9 20H4V18a4 4 0 015-3.87m8-6a4 4 0 11-8 0 4 4 0 018 0zm6 4a3 3 0 10-6 0m-8 0a3 3 0 11-6 0"
+          />
+        </svg>
+      ),
     },
+  
     {
-      icon: "🎓",
-      iconBg: "#fef3c7",
+      iconBg: "",
       value: "50+",
       label: "Expert Counselors",
+      icon: (
+        <svg
+          className="w-7 h-7"
+          fill="none"
+          stroke="#92400e"
+          strokeWidth={2}
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M12 14l9-5-9-5-9 5 9 5zm0 0v6m0-6l-7-4"
+          />
+        </svg>
+      ),
     },
+  
     {
-      icon: "🎥",
-      iconBg: "#ede9fe",
+      iconBg: "",
       value: "1,200+",
       label: "Live Sessions Held",
+      icon: (
+        <svg
+          className="w-7 h-7"
+          fill="none"
+          stroke="#5b21b6"
+          strokeWidth={2}
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M15 10l4.553-2.277A1 1 0 0121 8.677V15.32a1 1 0 01-1.447.894L15 14M3 8a2 2 0 012-2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z"
+          />
+        </svg>
+      ),
     },
+  
     {
-      icon: "📋",
-      iconBg: "#fee2e2",
+      iconBg: "",
       value: "95%",
       label: "Satisfaction Rate",
+      icon: (
+        <svg
+          className="w-7 h-7"
+          fill="none"
+          stroke="#991b1b"
+          strokeWidth={2}
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M5 13l4 4L19 7"
+          />
+        </svg>
+      ),
     },
   ];
 
@@ -415,13 +471,13 @@ function StatsBar() {
                 className="flex items-center gap-4"
               >
                 <div
-                  className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl"
-                  style={{
-                    backgroundColor: item.iconBg,
-                  }}
-                >
-                  {item.icon}
-                </div>
+  className="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0"
+  style={{
+    backgroundColor: item.iconBg,
+  }}
+>
+  {item.icon}
+</div>
 
                 <div>
                   <h3
@@ -454,123 +510,158 @@ function StatsBar() {
 }
 // ─── PROGRAMS + COUNSELING ────────────────────────────────────────────────────
 function ProgramsAndCounseling() {
-  const programs: Program[] = [
+  const programs = [
     {
-      icon: "👨‍👩‍👧",
-      iconBg: "#d1fae5",
+      iconBg: "#3A8D6A",
+      iconStroke: "white",
+      ctaColor: "#3A8D6A",
       title: "Parenting Program",
       desc: "Build stronger bonds and raise confident children.",
-      color: "#198754",
+      icon: (
+        <svg width="22" height="22" fill="none" stroke="white" strokeWidth={1.8} viewBox="0 0 24 24">
+          <circle cx="9" cy="7" r="3" />
+          <path strokeLinecap="round" strokeLinejoin="round" d="M3 20c0-3.314 2.686-6 6-6s6 2.686 6 6" />
+          <circle cx="17" cy="8" r="2.5" />
+          <path strokeLinecap="round" strokeLinejoin="round" d="M21 20c0-2.761-1.791-5-4-5" />
+        </svg>
+      ),
     },
     {
-      icon: "❤️",
-      iconBg: "#fff7ed",
+      iconBg: "#FCD6B2",
+      iconStroke: "#F49666",
+      ctaColor: "#F49666",
       title: "Marriage & Relationships",
       desc: "Strengthen your relationship and grow together.",
-      color: "#ea580c",
+      icon: (
+        <svg width="22" height="22" fill="none" stroke="#F49666" strokeWidth={1.8} viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+        </svg>
+      ),
     },
     {
-      icon: "🧍",
-      iconBg: "#ede9fe",
+      iconBg: "#EEEAFC",
+      iconStroke: "#9A8ADA",
+      ctaColor: "#9A8ADA",
       title: "Addiction Recovery",
       desc: "Find support, recovery and a new beginning.",
-      color: "#7c3aed",
+      icon: (
+        <svg width="22" height="22" fill="none" stroke="#9A8ADA" strokeWidth={1.8} viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+        </svg>
+      ),
     },
   ];
 
-  const counseling: CounselingService[] = [
+  const counseling = [
     {
-      icon: "👤",
-      iconBg: "#d1fae5",
+      iconBg: "#196F4C",
+      ctaColor: "#196F4C",
       title: "One-on-One Counseling",
       desc: "Book a private session with our expert counselors.",
       cta: "Book Now",
+      icon: (
+        <svg width="22" height="22" fill="none" stroke="white" strokeWidth={1.8} viewBox="0 0 24 24">
+          <circle cx="12" cy="9" r="3.5" />
+          <path strokeLinecap="round" strokeLinejoin="round" d="M5 20c0-3.866 3.134-7 7-7s7 3.134 7 7" />
+        </svg>
+      ),
     },
     {
-      icon: "🎭",
-      iconBg: "#fee2e2",
+      iconBg: "#D86134",
+      ctaColor: "#D86134",
       title: "Anonymous Support",
       desc: "Get help anonymously and confidentially.",
       cta: "Learn More",
+      icon: (
+        <svg width="22" height="22" fill="none" stroke="white" strokeWidth={1.8} viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M15 17h5l-1.4-1.4A2 2 0 0118 14.17V11a6 6 0 10-12 0v3.17c0 .53-.21 1.04-.59 1.43L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+        </svg>
+      ),
     },
   ];
 
   return (
-    <section className="py-10" style={{ backgroundColor: "var(--bg)" }}>
-  <div className="max-w-7xl mx-auto px-6">
+    <section className="py-12" style={{ backgroundColor: "var(--bg)" }}>
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
 
-    {/* Headers */}
-    <div className="mb-4" style={{ display: "grid", gridTemplateColumns: "3fr 2fr", gap: "16px" }}>
-      <div className="flex items-center justify-between">
-        <h2 className="text-lg font-extrabold" style={{ color: "var(--text)" }}>Our Programs</h2>
-        <a href="#" className="text-xs font-semibold text-emerald-600 flex items-center gap-1 hover:underline">
-          View All Programs
-          <svg className="w-3 h-3" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7"/></svg>
-        </a>
-      </div>
-      <div className="flex items-center justify-between">
-        <h2 className="text-lg font-extrabold" style={{ color: "var(--text)" }}>Counseling Services</h2>
-        <a href="#" className="text-xs font-semibold text-emerald-600 flex items-center gap-1 hover:underline">
-          View All Services
-          <svg className="w-3 h-3" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7"/></svg>
-        </a>
-      </div>
-    </div>
-
-    {/* Cards */}
-    <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr) repeat(2, 1fr)", gap: "12px" }}>
-
-      {programs.map((p) => (
-        <div
-          key={p.title}
-          className="flex flex-col p-4 rounded-2xl"
-          style={{
-            backgroundColor: "var(--card)",
-            boxShadow: "0 4px 16px rgba(0,0,0,0.10), 0 1px 4px rgba(0,0,0,0.06)",
-            border: "none",
-          }}
-        >
-          <div className="w-10 h-10 rounded-xl flex items-center justify-center text-xl flex-shrink-0 mb-3" style={{ backgroundColor: p.iconBg }}>
-            {p.icon}
+        {/* Headers */}
+        <div className="grid lg:grid-cols-[3fr_2fr] gap-6 mb-5">
+          <div className="flex items-center justify-between">
+            <h2 className="text-xl font-extrabold" style={{ color: "var(--text)" }}>Our Programs</h2>
+            <a href="#" className="text-sm font-semibold text-emerald-600 flex items-center gap-1">
+              View All Programs
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </a>
           </div>
-          <p className="font-bold text-xs leading-snug" style={{ color: "var(--text)" }}>{p.title}</p>
-          <p className="text-xs mt-1 flex-1 leading-relaxed" style={{ color: "var(--text-muted)" }}>{p.desc}</p>
-          <div className="flex items-center justify-between mt-3">
-            <span className="text-xs font-semibold" style={{ color: p.color }}>6 Weeks Program</span>
-            <button className="w-6 h-6 rounded-full flex items-center justify-center" style={{ background: "white", boxShadow: "0 1px 4px rgba(0,0,0,0.10)", border: "none" }}>
-              <svg className="w-3 h-3" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7"/></svg>
-            </button>
+          <div className="flex items-center justify-between">
+            <h2 className="text-xl font-extrabold" style={{ color: "var(--text)" }}>Counseling Services</h2>
+            <a href="#" className="text-sm font-semibold text-emerald-600 flex items-center gap-1">
+              View All Services
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </a>
           </div>
         </div>
-      ))}
 
-      {counseling.map((c) => (
-        <div
-          key={c.title}
-          className="flex flex-col p-4 rounded-2xl"
-          style={{
-            backgroundColor: "var(--card)",
-            boxShadow: "0 4px 16px rgba(0,0,0,0.10), 0 1px 4px rgba(0,0,0,0.06)",
-            border: "none",
-          }}
-        >
-          <div className="w-10 h-10 rounded-xl flex items-center justify-center text-xl flex-shrink-0 mb-3" style={{ backgroundColor: c.iconBg }}>
-            {c.icon}
-          </div>
-          <p className="font-bold text-xs leading-snug" style={{ color: "var(--text)" }}>{c.title}</p>
-          <p className="text-xs mt-1 flex-1 leading-relaxed" style={{ color: "var(--text-muted)" }}>{c.desc}</p>
-          <div className="flex items-center justify-between mt-3">
-            <span className="text-xs font-semibold text-emerald-600">{c.cta}</span>
-            <button className="w-6 h-6 rounded-full flex items-center justify-center" style={{ background: "white", boxShadow: "0 1px 4px rgba(0,0,0,0.10)", border: "none" }}>
-              <svg className="w-3 h-3" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7"/></svg>
-            </button>
-          </div>
+        {/* Cards */}
+        <div className="grid xl:grid-cols-5 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4">
+
+          {programs.map((p) => (
+            <div
+              key={p.title}
+              className="rounded-2xl p-4 flex flex-col"
+              style={{ backgroundColor: "var(--card)", boxShadow: "0 4px 14px rgba(0,0,0,0.09)" }}
+            >
+              <div className="flex items-start gap-3">
+                <div
+                  className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
+                  style={{ backgroundColor: p.iconBg }}
+                >
+                  {p.icon}
+                </div>
+                <div>
+                  <h3 className="font-bold text-sm" style={{ color: "var(--text)" }}>{p.title}</h3>
+                  <p className="text-xs mt-1 leading-relaxed" style={{ color: "var(--text-muted)" }}>{p.desc}</p>
+                </div>
+              </div>
+              <div className="mt-auto pt-4 flex items-center justify-between">
+                <span className="text-xs font-semibold" style={{ color: p.ctaColor }}>6 Weeks Program</span>
+                <button className="w-8 h-8 rounded-full bg-white shadow flex items-center justify-center text-sm">→</button>
+              </div>
+            </div>
+          ))}
+
+          {counseling.map((c) => (
+            <div
+              key={c.title}
+              className="rounded-2xl p-4 flex flex-col"
+              style={{ backgroundColor: "var(--card)", boxShadow: "0 4px 14px rgba(0,0,0,0.09)" }}
+            >
+              <div className="flex items-start gap-3">
+                <div
+                  className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
+                  style={{ backgroundColor: c.iconBg }}
+                >
+                  {c.icon}
+                </div>
+                <div>
+                  <h3 className="font-bold text-sm" style={{ color: "var(--text)" }}>{c.title}</h3>
+                  <p className="text-xs mt-1 leading-relaxed" style={{ color: "var(--text-muted)" }}>{c.desc}</p>
+                </div>
+              </div>
+              <div className="mt-auto pt-4 flex items-center justify-between">
+                <span className="text-xs font-semibold" style={{ color: c.ctaColor }}>{c.cta}</span>
+                <button className="w-8 h-8 rounded-full bg-white shadow flex items-center justify-center text-sm">→</button>
+              </div>
+            </div>
+          ))}
+
         </div>
-      ))}
-
-    </div>
-  </div>
-</section>
+      </div>
+    </section>
   );
 }
 
@@ -623,7 +714,7 @@ function BottomSections() {
       quote: "Family Center has been a blessing for our family. The sessions are life-changing!",
       name: "Sarah Johnson",
       role: "Program Participant",
-      image: "/testimonial-sarah.jpg",
+      image: "/Images/testimonial-sarah.jpg",
     },
     {
       quote: "The counselors are incredibly professional and empathetic. Highly recommend!",
@@ -755,51 +846,61 @@ function BottomSections() {
         </div>
 
         {/* ── STAY CONNECTED ── */}
-        <div className="flex flex-col justify-center mt-4">
-          <div
-            className="rounded-2xl p-5 relative overflow-hidden flex gap-3 items-start"
-            style={{ backgroundColor: "#E8F2EA" }}
-          >
-            {/* Left content */}
-            <div className="flex-1 min-w-0 relative z-10">
-              <h3 className="font-extrabold text-sm mb-1.5" style={{ color: "#111827" }}>
-                Stay Connected
-              </h3>
-              <p className="text-xs leading-relaxed mb-3" style={{ color: "#4b5563" }}>
-                Subscribe to get updates on new programs, resources and special offers.
-              </p>
+<div className="flex flex-col justify-center mt-4">
+  <div
+    className="rounded-2xl p-5 relative overflow-visible flex gap-3 items-end min-h-[160px]"
+    style={{ backgroundColor: "#E8F2EA" }}
+  >
+    {/* Left content */}
+    <div className="flex-1 min-w-0 relative z-10">
+      <h3 className="font-extrabold text-sm mb-1.5" style={{ color: "#111827" }}>
+        Stay Connected
+      </h3>
+      <p className="text-xs leading-relaxed mb-3" style={{ color: "#4b5563" }}>
+        Subscribe to get updates on new programs, resources and special offers.
+      </p>
 
-              {/* Joined email + button */}
-              <div className="flex rounded-lg overflow-hidden border border-emerald-300 bg-white">
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="flex-1 min-w-0 px-3 py-2 text-xs outline-none bg-transparent text-gray-800 placeholder-gray-400"
-                />
-                <button className="px-3 py-2 bg-emerald-700 text-white text-xs font-semibold hover:bg-emerald-800 transition-colors whitespace-nowrap flex-shrink-0">
-                  Subscribe
-                </button>
-              </div>
-            </div>
+      {/* Joined email + button */}
+      <div className="flex rounded-lg overflow-hidden bg-white">
+        <input
+          type="email"
+          placeholder="Enter your email"
+          className="flex-1 min-w-0 px-3 py-2 text-xs outline-none bg-transparent text-gray-800 placeholder-gray-400"
+        />
+        <button className="px-3 py-2 bg-emerald-700 text-white text-xs font-semibold hover:bg-emerald-800 transition-colors whitespace-nowrap flex-shrink-0">
+          Subscribe
+        </button>
+      </div>
+    </div>
 
-            {/* Right — plant image placeholder */}
-            <div className="flex-shrink-0 w-14 relative self-stretch">
-              <img
-                src="/Images/plant-decor.jpg"
-                alt="Decorative plant"
-                className="absolute bottom-0 right-0 h-20 w-auto object-contain"
-                onError={(e) => {
-                  e.currentTarget.style.display = "none";
-                  const parent = e.currentTarget.parentElement;
-                  if (parent) {
-                    parent.innerHTML =
-                      '<div class="absolute bottom-0 right-0 text-4xl select-none" style="opacity:0.55">🌿</div>';
-                  }
-                }}
-              />
-            </div>
-          </div>
-        </div>
+    {/* Right — plant image, overflows top of card */}
+    <div
+      className="flex-shrink-0 relative z-10"
+      style={{ width: "80px", marginBottom: "-20px" }}
+    >
+      <img
+        src="/Images/plant-decor.png"
+        alt="Decorative plant"
+        style={{
+          position: "absolute",
+          bottom: "0",
+          right: "0",
+          height: "140px",
+          width: "auto",
+          objectFit: "contain",
+        }}
+        onError={(e) => {
+          e.currentTarget.style.display = "none";
+          const parent = e.currentTarget.parentElement;
+          if (parent) {
+            parent.innerHTML =
+              '<div style="position:absolute;bottom:0;right:0;font-size:4rem;opacity:0.7;line-height:1">🌿</div>';
+          }
+        }}
+      />
+    </div>
+  </div>
+</div>
 
       </div>
     </section>
@@ -809,7 +910,7 @@ function BottomSections() {
 // ─── FOOTER ───────────────────────────────────────────────────────────────────
 function Footer() {
   return (
-    <footer className="bg-[#063020] text-white">
+    <footer className="bg-[#063020] text-white mt-[-40]">
       <div className="max-w-7xl mx-auto px-6 pt-12 pb-6">
         <div className="grid md:grid-cols-5 gap-8 mb-10">
           {/* Brand */}
@@ -903,25 +1004,11 @@ function Footer() {
 
 // ─── ROOT PAGE ─────────────────────────────────────────────────────────────────
 export default function Home() {
-  const [dark, setDark] = useState(false);
-
-  useEffect(() => {
-    const saved = localStorage.getItem("theme");
-    if (saved === "dark" || (!saved && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
-      document.documentElement.classList.add("dark");
-      setDark(true);
-    }
-  }, []);
-
-  const toggleDark = () => {
-    const isDark = document.documentElement.classList.toggle("dark");
-    localStorage.setItem("theme", isDark ? "dark" : "light");
-    setDark(isDark);
-  };
+ 
 
   return (
     <>
-      <Navbar dark={dark} toggleDark={toggleDark} />
+      <Navbar />
       <Hero />
       <StatsBar />
       <ProgramsAndCounseling />

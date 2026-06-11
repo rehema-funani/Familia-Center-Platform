@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import React from "react";
+import { Facebook, Instagram, Youtube, Linkedin } from "lucide-react";
 // ─── TYPES ────────────────────────────────────────────────────────────────────
 interface Program {
   icon: string;
@@ -45,35 +46,18 @@ function Navbar() {
   <div className="max-w-7xl mx-auto h-20 px-6 flex items-center justify-between">
 
     {/* Logo */}
-    <div className="flex items-center gap-2.5">
-      <div className="w-10 h-10 flex items-center justify-center">
-        <svg viewBox="0 0 40 40" fill="none" className="w-10 h-10">
-          <circle cx="20" cy="20" r="20" fill="#198754" opacity="0.12" />
-          <path
-            d="M20 8c-3 4-7 6-7 11a7 7 0 0014 0c0-5-4-7-7-11z"
-            fill="#198754"
-          />
-          <circle cx="14" cy="17" r="3" fill="#198754" opacity="0.6" />
-          <circle cx="26" cy="17" r="3" fill="#198754" opacity="0.6" />
-        </svg>
-      </div>
-
-      <div>
-        <p
-          className="font-bold text-lg leading-none"
-          style={{ color: "var(--text)" }}
-        >
-          Family Center
-        </p>
-
-        <p
-          className="text-xs"
-          style={{ color: "var(--text-muted)" }}
-        >
-          Together, We Grow
-        </p>
-      </div>
-    </div>
+{/* Logo */}
+<div className="flex items-center">
+  <Image
+    src="/Images/logo.png"
+    alt="Family Center Logo"
+    width={400}
+    height={120}
+    priority
+    className="w-auto h-20 md:h-28 lg:h-32 object-contain"
+    style={{ maxWidth: "none" }}
+  />
+</div>
 
     {/* Desktop Nav */}
     <div className="hidden md:flex items-center gap-8 text-sm font-medium">
@@ -530,8 +514,8 @@ function ProgramsAndCounseling() {
       iconBg: "#FCD6B2",
       iconStroke: "#F49666",
       ctaColor: "#F49666",
-      title: "Marriage & Relationships",
-      desc: "Strengthen your relationship and grow together.",
+      title: "Marriage & Love",
+      desc: "Strengthen your relationship and grow.",
       icon: (
         <svg width="22" height="22" fill="none" stroke="#F49666" strokeWidth={1.8} viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
@@ -556,8 +540,8 @@ function ProgramsAndCounseling() {
     {
       iconBg: "#196F4C",
       ctaColor: "#196F4C",
-      title: "One-on-One Counseling",
-      desc: "Book a private session with our expert counselors.",
+      title: "Private Session",
+      desc: "Book a private session with our counselors.",
       cta: "Book Now",
       icon: (
         <svg width="22" height="22" fill="none" stroke="white" strokeWidth={1.8} viewBox="0 0 24 24">
@@ -607,59 +591,59 @@ function ProgramsAndCounseling() {
         </div>
 
         {/* Cards */}
-        <div className="grid xl:grid-cols-5 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4">
+<div className="grid xl:grid-cols-5 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4">
 
-          {programs.map((p) => (
-            <div
-              key={p.title}
-              className="rounded-2xl p-4 flex flex-col"
-              style={{ backgroundColor: "var(--card)", boxShadow: "0 4px 14px rgba(0,0,0,0.09)" }}
-            >
-              <div className="flex items-start gap-3">
-                <div
-                  className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
-                  style={{ backgroundColor: p.iconBg }}
-                >
-                  {p.icon}
-                </div>
-                <div>
-                  <h3 className="font-bold text-sm" style={{ color: "var(--text)" }}>{p.title}</h3>
-                  <p className="text-xs mt-1 leading-relaxed" style={{ color: "var(--text-muted)" }}>{p.desc}</p>
-                </div>
-              </div>
-              <div className="mt-auto pt-4 flex items-center justify-between">
-                <span className="text-xs font-semibold" style={{ color: p.ctaColor }}>6 Weeks Program</span>
-                <button className="w-8 h-8 rounded-full bg-white shadow flex items-center justify-center text-sm">→</button>
-              </div>
-            </div>
-          ))}
+{programs.map((p) => (
+  <div
+    key={p.title}
+    className="rounded-2xl p-4 flex flex-col min-h-[160px]"
+    style={{ backgroundColor: "var(--card)", boxShadow: "0 4px 14px rgba(0,0,0,0.09)" }}
+  >
+    <div className="flex-1 flex items-end gap-3 pb-3">
+      <div
+        className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
+        style={{ backgroundColor: p.iconBg }}
+      >
+        {p.icon}
+      </div>
+      <div>
+        <h3 className="font-bold text-sm" style={{ color: "var(--text)" }}>{p.title}</h3>
+        <p className="text-xs mt-1 leading-relaxed" style={{ color: "var(--text-muted)" }}>{p.desc}</p>
+      </div>
+    </div>
+    <div className="pt-3 border-t border-gray-100 flex items-center justify-between">
+      <span className="text-xs font-semibold" style={{ color: p.ctaColor }}>6 Weeks Program</span>
+      <button className="w-8 h-8 rounded-full bg-white shadow flex items-center justify-center text-sm">→</button>
+    </div>
+  </div>
+))}
 
-          {counseling.map((c) => (
-            <div
-              key={c.title}
-              className="rounded-2xl p-4 flex flex-col"
-              style={{ backgroundColor: "var(--card)", boxShadow: "0 4px 14px rgba(0,0,0,0.09)" }}
-            >
-              <div className="flex items-start gap-3">
-                <div
-                  className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
-                  style={{ backgroundColor: c.iconBg }}
-                >
-                  {c.icon}
-                </div>
-                <div>
-                  <h3 className="font-bold text-sm" style={{ color: "var(--text)" }}>{c.title}</h3>
-                  <p className="text-xs mt-1 leading-relaxed" style={{ color: "var(--text-muted)" }}>{c.desc}</p>
-                </div>
-              </div>
-              <div className="mt-auto pt-4 flex items-center justify-between">
-                <span className="text-xs font-semibold" style={{ color: c.ctaColor }}>{c.cta}</span>
-                <button className="w-8 h-8 rounded-full bg-white shadow flex items-center justify-center text-sm">→</button>
-              </div>
-            </div>
-          ))}
+{counseling.map((c) => (
+  <div
+    key={c.title}
+    className="rounded-2xl p-4 flex flex-col min-h-[160px]"
+    style={{ backgroundColor: "var(--card)", boxShadow: "0 4px 14px rgba(0,0,0,0.09)" }}
+  >
+    <div className="flex-1 flex items-end gap-3 pb-3">
+      <div
+        className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
+        style={{ backgroundColor: c.iconBg }}
+      >
+        {c.icon}
+      </div>
+      <div>
+        <h3 className="font-bold text-sm" style={{ color: "var(--text)" }}>{c.title}</h3>
+        <p className="text-xs mt-1 leading-relaxed" style={{ color: "var(--text-muted)" }}>{c.desc}</p>
+      </div>
+    </div>
+    <div className="pt-3 border-t border-gray-100 flex items-center justify-between">
+      <span className="text-xs font-semibold" style={{ color: c.ctaColor }}>{c.cta}</span>
+      <button className="w-8 h-8 rounded-full bg-white shadow flex items-center justify-center text-sm">→</button>
+    </div>
+  </div>
+))}
 
-        </div>
+</div>
       </div>
     </section>
   );
@@ -911,94 +895,106 @@ function BottomSections() {
 function Footer() {
   return (
     <footer className="bg-[#063020] text-white mt-[-40]">
-      <div className="max-w-7xl mx-auto px-6 pt-12 pb-6">
-        <div className="grid md:grid-cols-5 gap-8 mb-10">
-          {/* Brand */}
-          <div className="md:col-span-2">
-            <div className="flex items-center gap-2 mb-3">
-              <div className="w-8 h-8 bg-emerald-700 rounded-lg flex items-center justify-center text-white text-sm">
-                🌿
-              </div>
-              <div>
-                <p className="font-bold text-sm">Family Center</p>
-                <p className="text-[10px] text-gray-400">Together, We Grow</p>
-              </div>
-            </div>
-            <p className="text-gray-400 text-xs leading-relaxed max-w-xs">
-              We are committed to supporting individuals and families through professional
-              counseling and educational programs.
-            </p>
-          </div>
+  <div className="max-w-7xl mx-auto px-6 pt-12 pb-6">
+    <div className="grid md:grid-cols-6 gap-8 mb-10">
 
-          {/* Quick Links */}
-          <div>
-            <h4 className="font-semibold text-sm mb-3">Quick Links</h4>
-            <ul className="space-y-2 text-gray-400 text-xs">
-              {["Home", "Programs", "Counseling", "Resources", "About", "Contact"].map((l) => (
-                <li key={l}>
-                  <a href="#" className="hover:text-white transition-colors">
-                    {l}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Programs */}
-          <div>
-            <h4 className="font-semibold text-sm mb-3">Programs</h4>
-            <ul className="space-y-2 text-gray-400 text-xs">
-              {["Parenting Program", "Marriage & Relationships", "Addiction Recovery"].map((l) => (
-                <li key={l}>
-                  <a href="#" className="hover:text-white transition-colors">
-                    {l}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Support */}
-          <div>
-            <h4 className="font-semibold text-sm mb-3">Support</h4>
-            <ul className="space-y-2 text-gray-400 text-xs">
-              {["FAQs", "Privacy Policy", "Terms of Service"].map((l) => (
-                <li key={l}>
-                  <a href="#" className="hover:text-white transition-colors">
-                    {l}
-                  </a>
-                </li>
-              ))}
-            </ul>
-            {/* Social */}
-            <div className="mt-5">
-              <p className="font-semibold text-sm mb-2">Connect With Us</p>
-              <div className="flex gap-2">
-                {[
-                  { label: "f", title: "Facebook" },
-                  { label: "ig", title: "Instagram" },
-                  { label: "yt", title: "YouTube" },
-                  { label: "in", title: "LinkedIn" },
-                ].map((s) => (
-                  <a
-                    key={s.label}
-                    href="#"
-                    title={s.title}
-                    className="w-8 h-8 rounded-full border border-gray-600 flex items-center justify-center text-gray-400 hover:border-emerald-500 hover:text-emerald-400 transition-colors text-[10px] font-bold uppercase"
-                  >
-                    {s.label}
-                  </a>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="border-t border-gray-700 pt-5 text-center text-gray-500 text-xs">
-          © 2024 Family Center. All rights reserved.
-        </div>
+      {/* Brand */}
+      <div className="md:col-span-2">
+        {/* Logo */}
+        <div className="flex items-center">
+  <Image
+    src="/Images/logo4.png"
+    alt="Family Center Logo"
+    width={400}
+    height={120}
+    priority
+    className="w-auto h-20 md:h-28 lg:h-32 object-contain"
+    style={{ maxWidth: "none" }}
+  />
+</div>
+        <p className="text-gray-400 text-xs leading-relaxed max-w-xs mt-[-40]">
+          We are committed to supporting individuals 
+          <br/>and families through professional
+          counseling and educational programs.
+        </p>
       </div>
-    </footer>
+
+      {/* Quick Links */}
+      <div>
+        <h4 className="font-semibold text-sm mb-3">Quick Links</h4>
+        <ul className="space-y-2 text-gray-400 text-xs">
+          {["Home", "Programs", "Counseling", "Resources", "About", "Contact"].map((l) => (
+            <li key={l}>
+              <a href="#" className="hover:text-white transition-colors">{l}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Programs */}
+      <div>
+        <h4 className="font-semibold text-sm mb-3">Programs</h4>
+        <ul className="space-y-2 text-gray-400 text-xs">
+          {["Parenting Program", "Marriage & Relationships", "Addiction Recovery"].map((l) => (
+            <li key={l}>
+              <a href="#" className="hover:text-white transition-colors">{l}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Support */}
+      <div>
+        <h4 className="font-semibold text-sm mb-3">Support</h4>
+        <ul className="space-y-2 text-gray-400 text-xs">
+          {["FAQs", "Privacy Policy", "Terms of Service"].map((l) => (
+            <li key={l}>
+              <a href="#" className="hover:text-white transition-colors">{l}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Connect With Us */}
+      <div>
+  <p className="font-semibold text-sm mb-3">Connect With Us</p>
+  <div className="flex gap-2">
+    {/* Facebook */}
+    <a href="#" aria-label="Facebook" className="w-8 h-8 rounded-full border border-gray-600 flex items-center justify-center text-gray-400 hover:border-emerald-500 hover:text-emerald-400 transition-colors">
+      <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+      </svg>
+    </a>
+    {/* Instagram */}
+    <a href="#" aria-label="Instagram" className="w-8 h-8 rounded-full border border-gray-600 flex items-center justify-center text-gray-400 hover:border-emerald-500 hover:text-emerald-400 transition-colors">
+      <svg width="15" height="15" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+        <circle cx="12" cy="12" r="4"/>
+        <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/>
+      </svg>
+    </a>
+    {/* YouTube */}
+    <a href="#" aria-label="YouTube" className="w-8 h-8 rounded-full border border-gray-600 flex items-center justify-center text-gray-400 hover:border-emerald-500 hover:text-emerald-400 transition-colors">
+      <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58a2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/>
+      </svg>
+    </a>
+    {/* LinkedIn */}
+    <a href="#" aria-label="LinkedIn" className="w-8 h-8 rounded-full border border-gray-600 flex items-center justify-center text-gray-400 hover:border-emerald-500 hover:text-emerald-400 transition-colors">
+      <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/>
+        <circle cx="4" cy="4" r="2"/>
+      </svg>
+    </a>
+  </div>
+</div>
+    </div>
+
+    <div className="border-t border-gray-700 pt-5 text-center text-gray-500 text-xs">
+      © 2024 Family Center. All rights reserved.
+    </div>
+  </div>
+</footer>
   );
 }
 

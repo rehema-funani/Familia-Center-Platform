@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import React from "react";
-import { Facebook, Instagram, Youtube, Linkedin } from "lucide-react";
+
 // ─── TYPES ────────────────────────────────────────────────────────────────────
 interface Program {
   icon: string;
